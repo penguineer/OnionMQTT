@@ -12,6 +12,8 @@
 
 #include <mosquitto.h>
 
+#include <oled-exp.h>
+
 const char* MQTT_HOST 	= "localhost";
 const int   MQTT_PORT 	= 1883;
 const char* MQTT_TOPIC_OLED_TEXT 	= "OnionOmega/OLED/text";
@@ -32,14 +34,18 @@ void handle_signal(int s)
 
 onion_oled_display_text(const char* text)
 {
+	//https://wiki.onion.io/Documentation/Libraries/OLED-Expansion-C-Library
 }
 
 onion_oled_display_image(const void* img)
 {
+	//https://wiki.onion.io/Documentation/Libraries/OLED-Expansion-C-Library
 }
 
 onion_rgb_display(const char* rgb)
 {
+	// https://wiki.onion.io/Tutorials/Controlling-RGB-LED
+	// https://wiki.onion.io/Documentation/Libraries/PWM-Expansion-C-Library
 }
 
 void mqtt_send(struct mosquitto* mosq,

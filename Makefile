@@ -6,7 +6,7 @@ INCLUDE = -I/usr/local/include
 CFLAGS  = $(DEBUG) -Wall $(INCLUDE) -Winline -pipe                              
                                                                                 
 LDFLAGS = -L/usr/local/lib                                                      
-LDLIBS    = -lpthread -lm -lmosquitto
+LDLIBS    = -lpthread -lm -lmosquitto -loniondebug -lonioni2c -lonionoledexp
 
 
 .phony: clean

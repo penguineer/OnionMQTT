@@ -8,6 +8,7 @@
 #include <string.h>
 
 #include <syslog.h>
+#include <signal.h>
 
 #include <mosquitto.h>
 
@@ -21,6 +22,13 @@ const char* MQTT_TOPIC_BTN = "OnionOmega/PB";
 
 #define MQTT_MSG_MAXLEN		  16
 const char* MQTT_MSG_TEST = "test";
+
+static int run = 1;
+
+void handle_signal(int s)
+{
+	run = 0;
+}
 
 onion_oled_display_text(const char* text)
 {
@@ -144,6 +152,9 @@ void mqtt_message_callback(struct mosquitto *mosq,
 }
 
 int main(int argc, char *argv[]) {
+	signal(SIGINT, handle_signal);
+	signal(SIGTERM, handle_signal);
+	
 	// initialize the system logging
 	openlog("onionmqtt", LOG_CONS | LOG_PID, LOG_USER);
 	syslog(LOG_INFO, "Starting Onion MQTT.");
@@ -184,7 +195,7 @@ int main(int argc, char *argv[]) {
 	char mqtt_payload[MQTT_MSG_MAXLEN];
 	
 	
-	char run=1;
+
 	while(run) {
 		mqtt_payload[0] = 0;
 		//strcpy(mqtt_payload, MQTT_MSG_TEST);
